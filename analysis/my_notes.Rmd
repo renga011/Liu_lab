@@ -1,0 +1,49 @@
+---
+title: "my_notes"
+author: "Kaushik Renganaath"
+date: "2025-02-14"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+Over the years, GWASs have found thousands of SNPs underlying human complex traits. It is also known that \~90% of these variants fall in the non-coding regions of the genome, implying their role in trait variation by modulating gene expression. Hence, there have been efforts made to map genomic loci underlying differential gene expression (for example, eQTLs for mRNAs and pQTLs for proteins) as they can be used to identify the genes underlying complex traits.
+
+Given the polygenic nature of complex traits, with different genes having variable effects on traits, the omnigenic model was proposed that suggested that all expressed genes in a trait relevant tissue contributed to trait variation. These genes however can be broadly categorized into two classes depending on their effects on the traits - the core genes or trait mediating genes which directly affect disease and therefore have the largest effects on the trait, and the peripheral genes which influence the trait by regulating the expression of trait mediating genes in trans.
+
+With Mostafavi's work suggesting that there is a systematic difference in the variants picked up by GWAS and cis-eQTL studies and finding by Liu et al that trans regulation is estimated to account for most of disease heritability, there is promise in using trans regulation for the purpose of understanding the underlying disease genetic architecture. My projects in this space will seek to take a deeper dive into disease architectures by exploiting the wealth of their trans regulation information. Given below are some of the big questions we are targeting.
+
+**I. Can we identify core disease genes by leveraging trans regulation?**
+
+Our lab recently came up with a method COTA, where we model the mediation paths from SNP --\> peripheral genes --\> core genes --\> disease to identify the core genes and their underlying peripheral gene networks. I are trying to apply COTA in the context of Alzheimer's disease (AD).
+
+There are two orthogonal paths that we are targeting using different types of data. COTA runs in two frameworks depending on the input data available. First framework is when we have genotype data available. In this case, we can obtain gene based association scores using GBAT, a gene based method to identify trans-effects. COTA uses a matrix of gene based association p-values along with the p values of gene effects directly acting on traits (from burden tests or the like) to identify the above mentioned mediation paths.
+
+Second framework is when genotype data is not available. In this case, COTA directly uses the SNP effects on the mediator genes. From pQTL or eQTL data, we can obtain a matrix of p values of trans SNP associations with genes. COTA uses this matrix to model the trans effecs of SNPs on core genes. Peripheral genes are estimated based on genomic proximity to the SNPs. The step with gene effects directly acting on traits from burden tests remains the same.
+
+Some interesting questions in this connection.
+
+1.  *What are the core genes and peripheral gene networks underlying AD?*
+2.  *How do these genes/networks compare for different neurological disorders?* : *(*using Marcus's results from depression)
+3.  *How do these results compare for different populations (we have ancestry resolved burden score data)?*
+
+**II. Identifying trans regulatory variants underlying functional gene networks in AD.**
+
+Lily's work can use expression data to identify the trans regulatory variant effects on gene networks underlying diseases. So we would exploit this Trans-PCO method along with gene coexpression networks or networks of genes involved in pathways underlying AD to identify trans variants regulating these networks. Comparing those with existing AD GWAS, we can annotate the mechanisms by which GWAS variants influence AD.
+
+Some interesting questions in this connection?
+
+1\. *Which biological processes are most important for AD?:* Once we find the trans SNPs associated with different pathways, you can compute how much of disease trait heritability they account for.
+
+```{r}
+
+```
+
+
+## What do we need?
+  I. COTA:
+    a) Using genotype data:
+      
+
