@@ -42,8 +42,8 @@ Some interesting questions in this connection?
 ```
 
 
-## What do we need?
-  I. COTA:
-    a) Using genotype data:
+## SNP based COTA
+  
+  
       
 
