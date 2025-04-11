@@ -1,0 +1,207 @@
+---
+title: "April 11"
+author: "Kaushik Renganaath"
+date: "`r format(Sys.Date(), '%d %B, %Y')`"  # Dynamic date formatting
+output: 
+  workflowr::wflow_html:
+    toc: true               # Table of contents
+    toc_float: true         # Floating TOC
+    toc_depth: 3            # Depth of TOC headings
+    code_folding: hide      # Hide code by default
+    fig_width: 10           # Default figure width
+    fig_height: 6           # Default figure height
+    fig_retina: 2           # For better resolution in HTML
+    theme: flatly           # Bootstrap theme
+    highlight: pygments     # Syntax highlighting
+    keep_md: true           # Keep intermediate markdown
+    df_print: paged         # Better data frame printing
+knit: workflowr::wflow_knit # Explicit knit function
+
+workflowr:
+  seed: 2024                # For reproducibility
+  root: "."                 # Project root
+  analysis_dir: "analysis/" # Where your Rmd files live
+  docs_dir: "docs/"         # Where HTML outputs go
+  cache_dir: "cache/"       # For cached chunks
+---
+
+## COTA results with Lee et al. (2023)
+
+Using:
+
+-   **Cruchaga trans pQTL** (renamed genes)
+
+-   **WES burden test** scores from Lee et al.
+
+> **some statistics of the WES data from Lee et al.**
+>
+> -   Size of study cohort (ADSP 17k): 6519 cases (total 13371 with controls)
+>
+> -   Burden scores were computed for genes using different sets of variant types. Number of genes for each of these variant categories are as follows
+>
+>     -   plof_ds (putative loss of function - deleterious strict) - 15306
+>
+>         > WE USE THESE GENES FOR COTA AS THESE ARE HIGH CONFIDENCE, HIGH IMPACT
+>
+>     -   plof - 11771
+>
+>     -   disruptive_missense - 10776
+>
+>     -   missense - 18170
+>
+>     -   synonymous - 18100
+
+### Result summary
+
+-   **\# proteins tested in trans pQTL**: 6983
+
+-   **\# proteins common with WES data (using only pLOF_ds)**: 5530
+
+-   **\# significant pairs detected**: *0*
+
+-   No detected significant pairs from COTA passed the FDR threshold of *q \< 0.1*, despite the sample size being \~6.5k cases (total \~13k with controls).
+
+### Validity of WES P-values
+
+We checked the distribution of WES-derived *p*-values:
+
+> **Insert QQ plot and histogram here**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, echo=FALSE, results='hide'}
+source("/Users/kaushik/Liu_lab/AD_causalGeneDiscovery/my_functions/plotQQAndHistogram.R")
+
+ADSP_STARRResults_pooledPopulations <- readr::read_table("~/Liu_lab/AD_causalGeneDiscovery/burden_test/ADSP_STARRResults_pooledPopulations.txt")
+p_wes = ADSP_STARRResults_pooledPopulations$STAAR.O[which(ADSP_STARRResults_pooledPopulations$Category == "plof_ds")]
+
+plots_wes = plotQQAndHistogram(p_wes, label = "Holstege WES p values")
+
+grid.arrange(plots_wes$qq, plots_wes$hist, ncol = 2)
+#plots_wes
+```
+
+-   The qq-plot shows a small kink away from the null in between, which maybe due to this being p values pooled across ancestries, a smaller effective sample size (lesser carriers), or combination of both.
+
+-   \~ This is only 6k samples and pooled across ancestries. Maybe therefore, there is no much power in the COTA
+
+### What next?
+
+-   Transition to Holstege et al. study data: Sample size \~16k cases (Total size with controls \~32.5k), and its all mostly Non hispanic white
+
+------------------------------------------------------------------------
+
+## COTA Results with Holstege data
+
+### Validity of WES p values
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, echo=FALSE, results='hide'}
+source("/Users/kaushik/Liu_lab/AD_causalGeneDiscovery/my_functions/plotQQAndHistogram.R")
+
+holstege_burdenP = readr::read_tsv("/Users/kaushik/Liu_lab/AD_causalGeneDiscovery/burden_test/holstege_burdenScores.tsv")
+plots_wes_holstege = plotQQAndHistogram(holstege_burdenP$pvalue, label = "Holstege WES p values")
+
+grid.arrange(plots_wes_holstege$qq, plots_wes_holstege$hist, ncol = 2)
+```
+
+### COTA run - notes
+
+> Gene tagging with multiple aptamers
+>
+> The trans pQTL data from Cruchaga has multiple aptamers tagging the same gene/protein.
+>
+> -   Correlation between aptamers tagging same protein in Cruchaga et al.: **0.79**
+>
+> To preserve this signal:
+>
+> -   When gene IDs are duplicated, we rename them as `GENE_1`, `GENE_2`, etc.
+>
+> -   If even one aptamer shows significance, it’s worth examining as it may provide clues on the mechanism (eg: If aptamer specific to N-terminus is significantly mediating but that targetted to C-terminus isn't).
+>
+> So we apply this renaming consistently across:
+>
+> -   `pQTL_trans: p value matrix for the trans eQTLs`
+>
+> -   `WES_pvals: p values corresponding to Holstege rare variant burden scores`
+>
+> -   `ref.table.keep: annotations for every gene on its start, end, chromosome, gene name, gene type (protein_coding/lncRNA)`
+>
+> -   `pQTL_cis: cis pQTLs detected by Cruchaga et al. (2023). Taken from their Supplementary tables`
+
+Using:
+
+-   **Cruchaga trans pQTL** (renamed genes)
+
+-   **WES burden test** scores from Holstege et al.
+
+> **some statistics of the WES data Holstege et al.**
+>
+> -   Size of study cohort (mixed cohort - see Supplementary table 1 of paper) : 6519 cases (total 13371 with controls)
+>
+> Burden scores were computed for genes using different sets of variant types. Number of genes for each of these variant categories are as follows
+>
+> -   LOF and REVEL score \>= 25 - 15306
+>
+>     > WE USE THESE GENES FOR COTA as most genes are included in the data for this category
+>
+> -   LOF and REVEL score \>= 50 - 11771
+>
+> -   LOF and REVEL score \>= 75 - 10776
+
+### Result Summary:
+
+-   **\# proteins tested in trans pQTL**: 6983
+
+-   **\# proteins common with WES data**: 4855
+
+-   **\# genes in the WES data with significant burden test score (p \< 1e-6): 4**
+
+-   **\# significant pairs detected (q \< 0.1): 210**
+
+-   **Core genes: 7**
+
+-   **Peripheral genes: 18**
+
+-   Gene-dense regions are more informative than individual gene counts.
+
+> genomic regions with hits: 4
+
+### Network Diagram
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, echo=FALSE, results='hide', fig.width=20, fig.height=15, out.width="100%"}
+
+library(ggplot2)
+library(magrittr)
+library(dplyr)
+library(igraph)
+
+# plot(network_object)
+source("/Users/kaushik/Liu_lab/AD_causalGeneDiscovery/pqtl_scripts/gen_fig_KR.R")
+load(file = "/Users/kaushik/Liu_lab/AD_causalGeneDiscovery/results_cota/AD_holstege_SNPBasedCOTA_allData.rda")
+
+gen_fig(result.pair$gene.pair, p.wes = p_wes_expanded, eta.wgs = 1e-5, filePath = file_path)
+```
+
+### Pathway Enrichment
+
+> Perform GO/KEGG/Reactome enrichment.
+
+-   No significant enrichments for core genes. Mostly due to their only being 7.
+
+-   The following core genes were also burden test significant:
+
+-   Performing on peripheral genes:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, echo=FALSE, results='hide', fig.width=10, fig.height=15, out.width="100%"}
+load("analysis/SNP_based_COTA/enrichmentResults.rda")
+
+grid.arrange(go_periph_plot, kegg_periph_plot, pathway_periph_plot, nrow = 3)
+
+```
+
+-   Enrichment seen in **peripheral immune signaling pathways**
+
+-   Likely driven by **HLA region**, which is very gene dense. The SNP based COTA assigns the SNP to the nearest genes with a cis pQTL. In such a gene dense region as HLA, you get multiple such assignments, and these will lead to enrichment in the immune signaling pathways, given all of them are of similar function. Hence, the GO/KEGG/Reactome enrichment is not so informative.
+
+### What next?
+
+-   Too little enrichments being seen. Have to amp up the power of the WES datasets. Search for a larger set or do meta-analysis over multiple WES sets maybe?!
+-   Many of the obvious genes known to be associated with AD aren't enriched in COTA. See what's up with them? What is their trans p value and WES p values. Make a table for these genes.
