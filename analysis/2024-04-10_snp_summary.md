@@ -1,5 +1,5 @@
 ---
-title: "April 11"
+title: "SNP based COTA pilot results"
 author: "Kaushik Renganaath"
 date: "11 April, 2025"  # Dynamic date formatting
 output: 
@@ -30,7 +30,7 @@ workflowr:
   data-toggle="collapse" data-target="#workflowr-report">
   <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
   workflowr
-  <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+  <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 
@@ -38,7 +38,7 @@ workflowr:
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#summary">Summary</a></li>
   <li><a data-toggle="tab" href="#checks">
-  Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+  Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
   </a></li>
   <li><a data-toggle="tab" href="#versions">Past versions</a></li>
 </ul>
@@ -48,9 +48,9 @@ workflowr:
   <p><strong>Last updated:</strong> 2025-04-11</p>
   <p><strong>Checks:</strong>
   <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-  7
+  6
   <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
-  0
+  1
   </p>
   <p><strong>Knit directory:</strong>
   <code>my_project_notes/</code>
@@ -73,17 +73,21 @@ workflowr:
   <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-  <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-  <strong>R Markdown file:</strong> up-to-date
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges">
+  <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+  <strong>R Markdown file:</strong> uncommitted changes
 </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-  
-Great! Since the R Markdown file has been committed to the Git repository, you
-know the exact version of the code that produced these results.
+  The R Markdown file has unstaged changes. 
+To know which version of the R Markdown file created these
+results, you'll want to first commit it to the Git repo. If
+you're still working on the analysis, you can ignore this
+warning. When you're finished, you can run
+<code>wflow_publish</code> to commit the R Markdown file and
+build the HTML.
 
 </div>
 </div>
@@ -183,13 +187,13 @@ makes it easier to run your code on other machines.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrenga011workingnotesliulabtree5f3181956368ab8bf6118dfce4b8dd0012d99403targetblank5f31819a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomrenga011workingnotesliulabtreef1cf6cf8562fadd68b684bf67345d6182c6f265btargetblankf1cf6cfa">
   <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-  <strong>Repository version:</strong> <a href="https://github.com/renga011/working_notes_liu_lab/tree/5f3181956368ab8bf6118dfce4b8dd0012d99403" target="_blank">5f31819</a>
+  <strong>Repository version:</strong> <a href="https://github.com/renga011/working_notes_liu_lab/tree/f1cf6cf8562fadd68b684bf67345d6182c6f265b" target="_blank">f1cf6cf</a>
 </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomrenga011workingnotesliulabtree5f3181956368ab8bf6118dfce4b8dd0012d99403targetblank5f31819a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomrenga011workingnotesliulabtreef1cf6cf8562fadd68b684bf67345d6182c6f265btargetblankf1cf6cfa" class="panel-collapse collapse">
 <div class="panel-body">
   
 <p>
@@ -198,7 +202,7 @@ connecting the code version to the results is critical for reproducibility.
 </p>
 
 <p>
-The results in this page were generated with repository version <a href="https://github.com/renga011/working_notes_liu_lab/tree/5f3181956368ab8bf6118dfce4b8dd0012d99403" target="_blank">5f31819</a>.
+The results in this page were generated with repository version <a href="https://github.com/renga011/working_notes_liu_lab/tree/f1cf6cf8562fadd68b684bf67345d6182c6f265b" target="_blank">f1cf6cf</a>.
 See the <em>Past versions</em> tab to see a history of the changes made to the
 R Markdown and HTML files.
 </p>
@@ -219,8 +223,9 @@ Ignored files:
 	Ignored:    analysis/Gene_based_COTA/
 	Ignored:    analysis/SNP_based_COTA/.DS_Store
 
-Untracked files:
-	Untracked:  analysis/2024-04-10_snp_summary.md
+Unstaged changes:
+	Modified:   analysis/2024-04-10_snp_summary.Rmd
+	Modified:   analysis/index.Rmd
 
 </code></pre>
 
@@ -257,6 +262,13 @@ view the files as they were in that past version.
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>html</td>
+<td><a href="https://rawcdn.githack.com/renga011/working_notes_liu_lab/b5dee20a19ec4ae2736217e5562daedf296e9145/docs/2024-04-10_snp_summary.html" target="_blank">b5dee20</a></td>
+<td>renga011</td>
+<td>2025-04-11</td>
+<td>Build site.</td>
+</tr>
 <tr>
 <td>html</td>
 <td><a href="https://rawcdn.githack.com/renga011/working_notes_liu_lab/b646a9ea6a65d28c62539ff64339cf8f78b7d99a/docs/2024-04-10_snp_summary.html" target="_blank">b646a9e</a></td>

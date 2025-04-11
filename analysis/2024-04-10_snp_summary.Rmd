@@ -1,5 +1,5 @@
 ---
-title: "April 11"
+title: "SNP based COTA pilot results"
 author: "Kaushik Renganaath"
 date: "`r format(Sys.Date(), '%d %B, %Y')`"  # Dynamic date formatting
 output: 

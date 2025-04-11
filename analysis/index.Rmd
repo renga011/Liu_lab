@@ -16,7 +16,7 @@ This site hosts analysis notebooks and results from my ongoing work on the COTA 
 
 ## SNP-based COTA
 
-- [April 11 COTA Results with Lee and Holstege data](2024-04-10_snp_summary.html)
+- [April 11 COTA Pilot Results with Lee and Holstege data](2024-04-10_snp_summary.html)
 
 ## Gene-based COTA
 
