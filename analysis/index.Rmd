@@ -12,7 +12,7 @@ editor_options:
 
 ## SNP-based COTA
 
-- [April 11](docs/2024-04-10_snp_analysis.html)
+- [April 11](docs/2024-04-10_snp_summary.html)
 
 ## Gene-based COTA
 
