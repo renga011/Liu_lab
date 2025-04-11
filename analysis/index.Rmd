@@ -8,15 +8,16 @@ editor_options:
   chunk_output_type: console
 ---
 
+Welcome to my research website.
+
+This site hosts analysis notebooks and results from my ongoing work on the COTA project.
+
 # COTA
 
 ## SNP-based COTA
 
-- [April 11](docs/2024-04-10_snp_summary.html)
+- [April 11 SNP Summary](2024-04-10_snp_summary.html)
 
 ## Gene-based COTA
 
-- [April 11](docs/2024-04-10_gene_expression.html)
-
-
-Welcome to my research website.
+- Coming soon!
