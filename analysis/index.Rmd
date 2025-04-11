@@ -8,4 +8,15 @@ editor_options:
   chunk_output_type: console
 ---
 
+# COTA
+
+## SNP-based COTA
+
+- [April 11](docs/2024-04-10_snp_analysis.html)
+
+## Gene-based COTA
+
+- [April 11](docs/2024-04-10_gene_expression.html)
+
+
 Welcome to my research website.
